@@ -34,6 +34,7 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
     <!-- END: Custom CSS-->
+    <script src="{{ asset('theme/vendors/js/vendors.min.js') }}"></script>
     <style>
         body, tr, .form-control, .form-select, label, .form-label{
             color: black;

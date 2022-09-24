@@ -1,3 +1,6 @@
+<?php
+$posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post_type', 'post')->get();
+?>
 <x-app-layout>
     <style>
         #iframe_container{
@@ -21,12 +24,51 @@
             display: flex !important;
         }
 
+        .vk_post_body {
+            padding-bottom: 45px;
+        }
+        .vk_post_title {
+            font-size: 18px;
+            line-height: 1.4;
+            font-weight: 700;
+            margin-bottom: 0;
+            padding-bottom: 0.5em;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+        .vk_post .vk_post_title a {
+            color: #333333;
+        }
+        .vk_post .vk_post_date {
+            font-size: 11px;
+            margin-top: 0.4rem;
+            color: #666666;
+        }
+        .main-section>.vk_posts>.vk_post-col-lg-12 .vk_post_excerpt {
+            font-size: 14px;
+            margin: 0.8rem 0;
+            line-height: 1.6;
+            opacity: .8;
+        }
+        .vk_post-btn-display .vk_post_btnOuter {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: right;
+        }
+        .vk_post .vk_post_btn {
+            font-size: 12px;
+            text-decoration: none;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            white-space: nowrap;
+            cursor: pointer;
+        }
     </style>
     <div class="auth-wrapper">
         <div class="auth-inner row m-0">
             <!-- Login-->
-            <div class="d-flex col-lg-12 align-items-center auth-bg px-2 p-lg-5">
-                <div class="col-6 col-sm-8 col-md-6 col-lg-4 px-xl-2 mx-auto">
+            <div class="d-flex col-lg-9 align-items-center auth-bg px-2 p-lg-5">
+                <div class="col-6 col-sm-8 col-md-6 col-lg-5 px-xl-2 mx-auto">
                     <!-- Brand logo-->
                     <a class="brand-logo" href="">
                         <svg viewBox="0 0 139 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="28">
@@ -54,7 +96,7 @@
                         </svg>
                     </a>
                     <!-- /Brand logo-->
-                    <h2 class="card-title fw-bold mb-1 text-center">{{__('company-title')}}</h2>
+                    <h2 class="card-title fw-bold mb-1 text-center">{{__('manager-title')}}</h2>
                     <h3 class="card-text mb-1 text-center">LaborManager</h3>
                     <h3 class="card-text mb-2 text-center" id="current_time"></h3>
                     <form class="auth-login-form mt-2" action="{{ route('login') }}" method="POST" style="margin-top: 50px !important;">
@@ -71,27 +113,52 @@
                                 <input class="form-control form-control-merge" id="login-password" type="password" name="password" aria-describedby="login-password" tabindex="2" required/><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                             </div>
                         </div>
-{{--                        <div class="mb-1">--}}
-{{--                            <div class="form-check">--}}
-{{--                                <input class="form-check-input" id="remember-me" type="checkbox" tabindex="3"/>--}}
-{{--                                <label class="form-check-label" for="remember-me"> Remember Me</label>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <input class="form-check-input d-none" id="remember-me" type="checkbox" name="remember" checked/>--}}
+                        {{--                        <div class="mb-1">--}}
+                        {{--                            <div class="form-check">--}}
+                        {{--                                <input class="form-check-input" id="remember-me" type="checkbox" tabindex="3"/>--}}
+                        {{--                                <label class="form-check-label" for="remember-me"> Remember Me</label>--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
+                        {{--                        <input class="form-check-input d-none" id="remember-me" type="checkbox" name="remember" checked/>--}}
                         <div class="d-flex mt-2">
                             <button class="btn btn-primary" tabindex="4" style="margin: auto">{{__('login')}}</button>
                         </div>
 
                     </form>
-{{--                    <p class="text-center mt-2"><span>New on our platform?</span><a href="auth-register-cover.html"><span>&nbsp;Create an account</span></a></p>--}}
+                    {{--                    <p class="text-center mt-2"><span>New on our platform?</span><a href="auth-register-cover.html"><span>&nbsp;Create an account</span></a></p>--}}
 
+                </div>
+            </div>
+            <div class="d-flex col-lg-3 align-items-center auth-bg px-2 p-lg-2">
+                <div class="col-6 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
+                    @foreach($posts as $post)
+                        <div class="vk_post_body media-body">
+                            <h5 class="vk_post_title media-title">
+                                <a href="{{$post->guid}}" target="_blank">{{$post->post_title}}</a></h5>
+                            <div class="vk_post_date media-date published">{{date('Y年m月d日', strtotime($post->post_date))}}</div>
+                            <input type="hidden" value="{{$post->post_content}}" class="text-content">
+                            <p class="vk_post_excerpt media-text"></p>
+                            <div class="vk_post_btnOuter text-right">
+                                <a class="btn btn-sm btn-primary vk_post_btn" href="{{$post->guid}}" target="_blank">続きを読む</a>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
             <!-- /Login-->
         </div>
     </div>
-{{--    <div id="iframe_container">--}}
-{{--        <iframe src="http://www.labormanager.sakura.ne.jp/web/"></iframe>--}}
-{{--    </div>--}}
+    <script>
+        $(document).ready(function (){
+            $('.text-content').each(function (){
+                let content = $(this).val();
+                console.log(content);
+                $(this).next().html(content);
+            })
+        })
+    </script>
+    {{--    <div id="iframe_container">--}}
+    {{--        <iframe src="http://www.labormanager.sakura.ne.jp/web/"></iframe>--}}
+    {{--    </div>--}}
 
 </x-app-layout>
