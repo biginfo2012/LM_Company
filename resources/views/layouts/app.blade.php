@@ -49,7 +49,7 @@
 <body class="vertical-layout vertical-menu-modern blank-page navbar-floating footer-static  " data-open="click"
       data-menu="vertical-menu-modern" data-col="blank-page">
 <!-- BEGIN: Content-->
-<div class="app-content content ">
+<div class="app-content content "  style="height: calc(100% - 3.35rem); overflow: hidden;">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
@@ -61,8 +61,9 @@
     </div>
 </div>
 <!-- END: Content-->
-
-
+<footer class="footer footer-static footer-light" style="background: white">
+    <p class="clearfix mb-0 d-flex"><span class="float-md-start d-block d-md-inline-block mt-25" style="margin: auto">Copyright &copy; 2022 LaborManager, All rights Reserved</span></p>
+</footer>
 <!-- BEGIN: Vendor JS-->
 <script src="{{ asset('theme/vendors/js/vendors.min.js') }}"></script>
 <script src="{{ asset('theme/vendors/js/extensions/moment.min.js') }}"></script>

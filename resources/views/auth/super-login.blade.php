@@ -67,7 +67,7 @@ $posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post
     <div class="auth-wrapper">
         <div class="auth-inner row m-0">
             <!-- Login-->
-            <div class="d-flex col-lg-9 align-items-center auth-bg px-2 p-lg-5">
+            <div class="d-flex col-lg-8 align-items-center auth-bg px-2 p-lg-5" style="padding-right: 0 !important;">
                 <div class="col-6 col-sm-8 col-md-6 col-lg-5 px-xl-2 mx-auto">
                     <!-- Brand logo-->
                     <a class="brand-logo" href="">
@@ -98,6 +98,7 @@ $posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post
                     <!-- /Brand logo-->
                     <h2 class="card-title fw-bold mb-1 text-center">{{__('manager-title')}}</h2>
                     <h3 class="card-text mb-1 text-center">LaborManager</h3>
+                    <h4 class="card-text mb-1 text-center">会社システム管理画面</h4>
                     <h3 class="card-text mb-2 text-center" id="current_time"></h3>
                     <form class="auth-login-form mt-2" action="{{ route('login') }}" method="POST" style="margin-top: 50px !important;">
                         @csrf
@@ -113,6 +114,13 @@ $posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post
                                 <input class="form-control form-control-merge" id="login-password" type="password" name="password" aria-describedby="login-password" tabindex="2" required/><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                             </div>
                         </div>
+                        <div class="mb-1">
+                            <div class="d-flex justify-content-between">
+                                <label class="form-label">{{__('password-forget')}}</label>
+                            </div>
+                        </div>
+                        {{--                        <input class="form-check-input d-none" id="remember-me" type="checkbox" name="remember" checked/>--}}
+
                         {{--                        <div class="mb-1">--}}
                         {{--                            <div class="form-check">--}}
                         {{--                                <input class="form-check-input" id="remember-me" type="checkbox" tabindex="3"/>--}}
@@ -129,7 +137,7 @@ $posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post
 
                 </div>
             </div>
-            <div class="d-flex col-lg-3 align-items-center auth-bg px-2 p-lg-2">
+            <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-2" style="padding-left: 0 !important;">
                 <div class="col-6 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
                     @foreach($posts as $post)
                         <div class="vk_post_body media-body">

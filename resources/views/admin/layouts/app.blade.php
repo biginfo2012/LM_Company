@@ -62,18 +62,6 @@
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-    <style>
-        body, tr, .form-control, .form-select{
-            color: black;
-            font-size: 15px;
-        }
-        tr, .col-form-label-lg{
-            font-size: 15px;
-        }
-        div.dataTables_wrapper .dataTables_info{
-            color: black;
-        }
-    </style>
 
 </head>
 <!-- END: Head-->
@@ -163,6 +151,25 @@
             //$('#now_time').html(momentNow.format('hh:mm:ss YYYY年MM月DD日'));
             $('#now_time').html(content);
         }, 100);
+    });
+    jQuery.extend(jQuery.validator.messages, {
+        required: "この項目は必須です。",
+        remote: "このフィールドを修正してください。",
+        email: "正しいEメールアドレスを入力してください。",
+        url: "有効なURLを入力してください。",
+        date: "有効な日付を入力してください。",
+        dateISO: "有効な日付(ISO)を入力してください。",
+        number: "正しい番号を入力してください。",
+        digits: "数字だけを入力してください。",
+        creditcard: "正しいクレジットカード番号を入力してください。",
+        equalTo: "もう一度同じ値を入力してください。",
+        accept: "有効な内線番号の値を入力してください。",
+        maxlength: jQuery.validator.format("{0}文字以内で入力してください。"),
+        minlength: jQuery.validator.format("{0}文字以上入力してください。"),
+        rangelength: jQuery.validator.format("{0}文字から{1}文字の間の値を入力してください。"),
+        range: jQuery.validator.format("{0}~{1}の間の値を入力してください。"),
+        max: jQuery.validator.format("{0}以下の値を入力してください。"),
+        min: jQuery.validator.format("{0}以上の値を入力してください。")
     });
 </script>
 </body>
