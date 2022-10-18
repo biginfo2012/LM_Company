@@ -91,7 +91,7 @@
     $(document).ready(function () {
         var interval = setInterval(function () {
             var momentNow = moment();
-            $('#current_time').html(momentNow.format('YYYY年MM月DD日 hh:mm'));
+            $('#current_time').html(momentNow.format('YYYY年MM月DD日 hh:mm A'));
         }, 100);
     });
 </script>

@@ -1,5 +1,5 @@
 <?php
-$posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post_type', 'post')->get();
+//$posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post_type', 'post')->get();
 ?>
 <x-app-layout>
     <style>
@@ -100,7 +100,7 @@ $posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post
                     <h3 class="card-text mb-1 text-center">LaborManager</h3>
                     <h4 class="card-text mb-1 text-center">会社システム管理画面</h4>
                     <h3 class="card-text mb-2 text-center" id="current_time"></h3>
-                    <form class="auth-login-form mt-2" action="{{ route('login') }}" method="POST" style="margin-top: 50px !important;">
+                    <form class="auth-login-form mt-2" id="login_form" action="{{ route('login') }}" method="POST" style="margin-top: 50px !important;">
                         @csrf
                         <div class="mb-1">
                             <label class="form-label" for="login-email">{{__('user-id')}}</label>
@@ -129,7 +129,7 @@ $posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post
                         {{--                        </div>--}}
                         {{--                        <input class="form-check-input d-none" id="remember-me" type="checkbox" name="remember" checked/>--}}
                         <div class="d-flex mt-2">
-                            <button class="btn btn-primary" tabindex="4" style="margin: auto">{{__('login')}}</button>
+                            <button class="btn btn-primary" tabindex="4" style="margin: auto" onclick="event.preventDefault(); refreshToken();">{{__('login')}}</button>
                         </div>
 
                     </form>
@@ -139,18 +139,18 @@ $posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post
             </div>
             <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-2" style="padding-left: 0 !important;">
                 <div class="col-6 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-                    @foreach($posts as $post)
-                        <div class="vk_post_body media-body">
-                            <h5 class="vk_post_title media-title">
-                                <a href="{{$post->guid}}" target="_blank">{{$post->post_title}}</a></h5>
-                            <div class="vk_post_date media-date published">{{date('Y年m月d日', strtotime($post->post_date))}}</div>
-                            <input type="hidden" value="{{$post->post_content}}" class="text-content">
-                            <p class="vk_post_excerpt media-text"></p>
-                            <div class="vk_post_btnOuter text-right">
-                                <a class="btn btn-sm btn-primary vk_post_btn" href="{{$post->guid}}" target="_blank">続きを読む</a>
-                            </div>
-                        </div>
-                    @endforeach
+{{--                    @foreach($posts as $post)--}}
+{{--                        <div class="vk_post_body media-body">--}}
+{{--                            <h5 class="vk_post_title media-title">--}}
+{{--                                <a href="{{$post->guid}}" target="_blank">{{$post->post_title}}</a></h5>--}}
+{{--                            <div class="vk_post_date media-date published">{{date('Y年m月d日', strtotime($post->post_date))}}</div>--}}
+{{--                            <input type="hidden" value="{{$post->post_content}}" class="text-content">--}}
+{{--                            <p class="vk_post_excerpt media-text"></p>--}}
+{{--                            <div class="vk_post_btnOuter text-right">--}}
+{{--                                <a class="btn btn-sm btn-primary vk_post_btn" href="{{$post->guid}}" target="_blank">続きを読む</a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    @endforeach--}}
                 </div>
             </div>
             <!-- /Login-->
@@ -164,6 +164,15 @@ $posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post
                 $(this).next().html(content);
             })
         })
+        var csrfToken = $('[name="csrf_token"]').attr('content');
+        function refreshToken(){
+            $.get('refresh-csrf').done(function(data){
+                csrfToken = data; // the new token
+                $('[name="_token"]').val(data);
+                console.log(data);
+                $( "#login_form" ).submit();
+            });
+        }
     </script>
     {{--    <div id="iframe_container">--}}
     {{--        <iframe src="http://www.labormanager.sakura.ne.jp/web/"></iframe>--}}

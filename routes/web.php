@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.super-login');
 });
+
+Route::get('refresh-csrf', function(){
+    return csrf_token();
+});
+
 Route::group(['middleware' => 'auth'], function (){
     Route::group(['middleware' => ['can:company']], function () {
         Route::get('employee-manage', [CompanyController::class, 'manageEmployee'])->name('company.employee-manage');
