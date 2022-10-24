@@ -19,6 +19,7 @@ class CreateDocumentsTable extends Migration
             $table->string('name');
             $table->string('url');
             $table->integer('company_id');
+            $table->string('file_name');
             $table->timestamps();
         });
     }

@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth'], function (){
         Route::post('doc-save', [CompanyController::class, 'saveDoc'])->name('company.doc-save');
         Route::post('doc-delete', [CompanyController::class, 'deleteDoc'])->name('company.doc-delete');
         Route::post('doc-table', [CompanyController::class, 'tableDoc'])->name('company.doc-table');
+        Route::get('doc-download/{id}', [CompanyController::class, 'downloadDoc'])->name('company.doc-download');
     });
 });
 

@@ -236,6 +236,7 @@ class CompanyController extends Controller
         $data['doc_code'] = $doc->doc_code;
         $data['name'] = $doc->name;
         $data['url'] = $doc->url;
+        $data['file_name'] = $doc->file_name;
         $data['viewer'] = '';
         $data['agree'] = '';
         $data['unread'] = '';
@@ -281,6 +282,7 @@ class CompanyController extends Controller
             if($request->hasFile('file')){
                 $file = $request->file('file');
                 $filename = uniqid('file_', true) . '.' . $file->getClientOriginalExtension();
+                $originalName = $file->getClientOriginalName();
                 $destinationPath = public_path() . '/upload/';
                 //$destinationPath = storage_path('app/public');
                 $file->move($destinationPath, $filename);
@@ -289,7 +291,8 @@ class CompanyController extends Controller
                     'doc_code' => $request->doc_code,
                     'name' => $request->name,
                     'url' => $filename,
-                    'company_id' => $company_id
+                    'company_id' => $company_id,
+                    'file_name' => $originalName
                 ];
                 Document::create($data);
             }
@@ -298,13 +301,15 @@ class CompanyController extends Controller
             if($request->hasFile('file')){
                 $file = $request->file('file');
                 $filename = uniqid('file_', true) . '.' . $file->getClientOriginalExtension();
+                $originalName = $file->getClientOriginalName();
                 $destinationPath = public_path() . '/upload/';
                 $file->move($destinationPath, $filename);
                 $path = '/public/upload/' . $filename;
                 $data = [
                     'doc_code' => $request->doc_code,
                     'name' => $request->name,
-                    'url' => $filename
+                    'url' => $filename,
+                    'file_name' => $originalName
                 ];
 
             }
@@ -323,5 +328,15 @@ class CompanyController extends Controller
         Document::where('id', $id)->delete();
         UserDocument::where('doc_id', $id)->delete();
         return response()->json(['status' => true]);
+    }
+    public function downloadDoc($id){
+        $doc = Document::find($id);
+        $file_name = $doc->file_name . '.pdf';
+        $file = public_path().'/upload/'.$doc->url;
+        $headers = [
+            'Content-Type' => 'application/pdf',
+        ];
+
+        return response()->download($file, $file_name, $headers);
     }
 }

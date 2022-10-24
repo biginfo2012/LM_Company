@@ -9,6 +9,6 @@ class Document extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'doc_code', 'name', 'url', 'company_id'
+        'doc_code', 'name', 'url', 'company_id', 'file_name'
     ];
 }
