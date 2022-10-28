@@ -331,12 +331,18 @@ class CompanyController extends Controller
     }
     public function downloadDoc($id){
         $doc = Document::find($id);
-        $file_name = $doc->file_name . '.pdf';
-        $file = public_path().'/upload/'.$doc->url;
-        $headers = [
-            'Content-Type' => 'application/pdf',
-        ];
+        if(isset($doc)){
+            $file_name = $doc->file_name . '.pdf';
+            $file = public_path().'/upload/'.$doc->url;
+            if(file_exists($file)){
+                $headers = [
+                    'Content-Type' => 'application/pdf',
+                ];
+                return response()->download($file, $file_name, $headers);
+            }
+        }
 
-        return response()->download($file, $file_name, $headers);
+        return redirect('404');
+
     }
 }

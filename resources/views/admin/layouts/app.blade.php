@@ -146,7 +146,7 @@
         var interval = setInterval(function () {
             var momentNow = moment();
             let d = momentNow.format('YYYY年MM月DD日')
-            let t = momentNow.format('hh:mm:ss')
+            let t = momentNow.format('A hh:mm:ss')
             let content = '<span style="margin-right: 20px;">' + d + '</span>' + '<span>' + t + '</span>'
             //$('#now_time').html(momentNow.format('hh:mm:ss YYYY年MM月DD日'));
             $('#now_time').html(content);
