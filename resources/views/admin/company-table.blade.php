@@ -17,9 +17,9 @@
         <tr style="{{$item->status == 0 ? 'color: red' : ''}}">
             <td class="p-0 border text-center align-middle">{{$index+1}}</td>
             <td class="p-0 border text-center align-middle">{{$item['user_code']}}</td>
-            <td class="p-0 border text-center align-middle">{{$item['name']}}</td>
-            <td class="p-0 border text-center align-middle">{{$item['email']}}</td>
-            <td class="p-0 border text-center align-middle">{{$item['contact']}}</td>
+            <td class="p-0 border text-left align-middle px-1">{{$item['name']}}</td>
+            <td class="p-0 border text-left align-middle px-1">{{$item['email']}}</td>
+            <td class="p-0 border text-left align-middle px-1">{{$item['contact']}}</td>
             <td class="p-0 border text-center align-middle">{{date('Y/m/d', strtotime($item['created_at']))}}</td>
             <td class="p-0 border text-center align-middle">{{$item['status'] == 1 ? __('enable') : __('stop')}}</td>
             <td class="p-0 border text-center align-middle">

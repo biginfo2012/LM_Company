@@ -43,13 +43,18 @@
         tr{
             font-size: 15px;
         }
+        @media (min-width: 992px) {
+            .scroll-hide{
+                overflow: hidden !important;
+            }
+        }
     </style>
 </head>
 <!-- BEGIN: Body-->
 <body class="vertical-layout vertical-menu-modern blank-page navbar-floating footer-static  " data-open="click"
       data-menu="vertical-menu-modern" data-col="blank-page">
 <!-- BEGIN: Content-->
-<div class="app-content content "  style="height: calc(100% - 3.35rem); overflow: hidden;">
+<div class="app-content content scroll-hide" style="height: calc(100vh - 3.35rem) !important">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">

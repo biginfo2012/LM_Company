@@ -18,7 +18,7 @@
         <tr>
             <td class="p-0 border text-center align-middle">{{$index+1}}</td>
             <td class="p-0 border text-center align-middle">{{$item['doc_code']}}</td>
-            <td class="p-0 border text-center align-middle">{{$item['name']}}</td>
+            <td class="p-0 border text-left align-middle px-1">{{$item['name']}}</td>
             <td class="p-0 border text-center align-middle">{{$item['dist_date']}}</td>
             <td class="p-0 border text-center align-middle">{{$item['dist']}}</td>
             <td class="p-0 border text-center align-middle">{{$item['view']}}</td>

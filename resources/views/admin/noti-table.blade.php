@@ -15,7 +15,7 @@
             <td class="p-0 border text-center align-middle">{{$index+1}}</td>
             <td class="p-0 border text-center align-middle">{{date('Y/m/d H:i', strtotime($item['created_at']))}}</td>
             <td class="p-0 border text-center align-middle">{{$item['status'] == 1 ? __('bottom') : ($item['status'] == 0 ? __('yet') : __('done'))}}</td>
-            <td class="p-0 border text-center align-middle">{{$item['title']}}</td>
+            <td class="p-0 border text-left align-middle px-1">{{$item['title']}}</td>
             <td class="p-0 border text-center align-middle">
                 <input type="hidden" value="{{$item['id']}}">
                 <a href="{{route('company.noti-edit', $item['id'])}}" class="btn btn-outline-dark waves-effect ex_change" style="padding: 8px; margin: 5px;">{{__('edit')}}</a>

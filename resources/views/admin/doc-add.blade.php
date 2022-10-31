@@ -53,7 +53,7 @@
                                             <label for="formFile" class="col-sm-1 col-form-label-lg"
                                                    style="padding-right: 0">{{__('doc-file')}}</label>
                                             <div class="col-sm-5" style="padding-left: 0">
-                                                <input class="form-control" type="file" id="formFile" name="file" {{isset($data) ? '' : 'required'}}/>
+                                                <input class="form-control" type="file" id="formFile" accept="application/pdf" name="file" {{isset($data) ? '' : 'required'}}/>
                                                 @isset($data)
                                                     <a href="{{route('company.doc-download', $data['id'])}}">{{$data['file_name']}}</a>
                                                 @endif
