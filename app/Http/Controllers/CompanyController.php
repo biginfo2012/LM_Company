@@ -10,6 +10,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Mockery\Matcher\Not;
 
 class CompanyController extends Controller
@@ -332,7 +333,9 @@ class CompanyController extends Controller
     public function downloadDoc($id){
         $doc = Document::find($id);
         if(isset($doc)){
-            $file_name = $doc->file_name . '.pdf';
+            $file_name = $doc->file_name;
+            //$file_name1 = str_replace(array(".pdf", ".PDF"), "", $file_name);
+            Log::info("file_name: " . $file_name);
             $file = public_path().'/upload/'.$doc->url;
             if(file_exists($file)){
                 $headers = [

@@ -3,6 +3,9 @@ $posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post
 ?>
 <x-app-layout>
     <style>
+        img{
+            max-width: 100% !important;
+        }
         #iframe_container{
             position: absolute;
             right: 0;
@@ -67,7 +70,7 @@ $posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post
     <div class="auth-wrapper">
         <div class="auth-inner row m-0">
             <!-- Login-->
-            <div class="d-flex col-lg-8 align-items-center auth-bg px-2 p-lg-5" style="padding-right: 0 !important;">
+            <div class="d-flex {{count($posts) != 0 ? 'col-lg-8' : 'col-lg-12'}} col-lg-8 align-items-center auth-bg px-2 p-lg-5" style="padding-right: 0 !important;">
                 <div class="col-6 col-sm-8 col-md-6 col-lg-5 px-xl-2 mx-auto">
                     <!-- Brand logo-->
                     <a class="brand-logo" href="">
@@ -137,22 +140,24 @@ $posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post
 
                 </div>
             </div>
-            <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-2" style="padding-left: 0 !important;">
-                <div class="col-6 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-                    @foreach($posts as $post)
-                        <div class="vk_post_body media-body">
-                            <h5 class="vk_post_title media-title">
-                                <a href="{{$post->guid}}" target="_blank">{{$post->post_title}}</a></h5>
-                            <div class="vk_post_date media-date published">{{date('Y年m月d日', strtotime($post->post_date))}}</div>
-                            <input type="hidden" value="{{$post->post_content}}" class="text-content">
-                            <p class="vk_post_excerpt media-text"></p>
-                            <div class="vk_post_btnOuter text-right">
-                                <a class="btn btn-sm btn-primary vk_post_btn" href="{{$post->guid}}" target="_blank">続きを読む</a>
+            @if(count($posts) != 0)
+                <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-2" style="padding-left: 0 !important;">
+                    <div class="col-6 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto" style="height: 80vh; overflow-y: scroll">
+                        @foreach($posts as $post)
+                            <div class="vk_post_body media-body">
+                                <h5 class="vk_post_title media-title">
+                                    <a href="{{$post->guid}}" target="_blank">{{$post->post_title}}</a></h5>
+                                <div class="vk_post_date media-date published">{{date('Y年m月d日', strtotime($post->post_date))}}</div>
+                                <input type="hidden" value="{{$post->post_content}}" class="text-content">
+                                <p class="vk_post_excerpt media-text"></p>
+                                <div class="vk_post_btnOuter text-right">
+                                    <a class="btn btn-sm btn-primary vk_post_btn" href="{{$post->guid}}" target="_blank">続きを読む</a>
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
-            </div>
+            @endif
             <!-- /Login-->
         </div>
     </div>
