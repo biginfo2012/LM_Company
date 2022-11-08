@@ -1,5 +1,5 @@
 <?php
-$posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post_type', 'post')->get();
+$posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post_type', 'post')->orderBy('post_date', 'desc')->get();
 ?>
 <x-app-layout>
     <style>
@@ -65,6 +65,21 @@ $posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post
             padding-right: 1rem;
             white-space: nowrap;
             cursor: pointer;
+        }
+        .media-text{
+            height: 25px !important;
+            overflow: hidden;
+        }
+        .media-text > p{
+            max-width: 80%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .media-text>img, .media-text>figure, .media-text>video, .media-text>audio, .media-text>li, .media-text>iframe,
+        .media-text>ul, .media-text>blockquote, .media-text>h1, .media-text>h2, .media-text>h3, .media-text>h4, .media-text>h5,
+        .media-text>h6, .media-text>a, .media-text>div {
+            display: none !important;
         }
     </style>
     <div class="auth-wrapper">
@@ -142,7 +157,7 @@ $posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post
             </div>
             @if(count($posts) != 0)
                 <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-2" style="padding-left: 0 !important;">
-                    <div class="col-6 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto" style="height: 80vh; overflow-y: scroll">
+                    <div class="col-6 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto" style="height: 80vh; overflow-y: auto">
                         @foreach($posts as $post)
                             <div class="vk_post_body media-body">
                                 <h5 class="vk_post_title media-title">
