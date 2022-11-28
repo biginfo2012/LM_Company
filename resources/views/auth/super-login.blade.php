@@ -1,5 +1,5 @@
 <?php
-$posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post_type', 'post')->orderBy('post_date', 'desc')->get();
+$posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post_type', 'post')->orderBy('post_date', 'desc')->take(5)->get();
 ?>
 <x-app-layout>
     <style>
@@ -85,8 +85,8 @@ $posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post
     <div class="auth-wrapper">
         <div class="auth-inner row m-0">
             <!-- Login-->
-            <div class="d-flex {{count($posts) != 0 ? 'col-lg-8' : 'col-lg-12'}} col-lg-8 align-items-center auth-bg px-2 p-lg-5" style="padding-right: 0 !important;">
-                <div class="col-6 col-sm-8 col-md-6 col-lg-5 px-xl-2 mx-auto">
+            <div class="d-flex {{count($posts) != 0 ? 'col-lg-8' : 'col-lg-12'}} align-items-center auth-bg px-2 p-lg-5" style="padding-right: 0 !important;">
+                <div class="col-6 col-sm-8 col-md-6 col-lg-5 px-xl-2 mx-auto" style="height: 80vh; overflow-y: auto">
                     <!-- Brand logo-->
                     <a class="brand-logo" href="">
                         <svg viewBox="0 0 139 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="28">
