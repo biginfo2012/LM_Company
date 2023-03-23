@@ -1,5 +1,6 @@
 <?php
-$posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post_type', 'post')->orderBy('post_date', 'desc')->take(5)->get();
+    $posts = [];
+//$posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post_type', 'post')->orderBy('post_date', 'desc')->take(5)->get();
 ?>
 <x-app-layout>
     <style>
@@ -155,24 +156,24 @@ $posts = \App\Models\WordpressPost::where('post_status', 'publish')->where('post
 
                 </div>
             </div>
-            @if(count($posts) != 0)
-                <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-2" style="padding-left: 0 !important;">
-                    <div class="col-6 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto" style="height: 80vh; overflow-y: auto">
-                        @foreach($posts as $post)
-                            <div class="vk_post_body media-body">
-                                <h5 class="vk_post_title media-title">
-                                    <a href="{{$post->guid}}" target="_blank">{{$post->post_title}}</a></h5>
-                                <div class="vk_post_date media-date published">{{date('Y年m月d日', strtotime($post->post_date))}}</div>
-                                <input type="hidden" value="{{$post->post_content}}" class="text-content">
-                                <p class="vk_post_excerpt media-text"></p>
-                                <div class="vk_post_btnOuter text-right">
-                                    <a class="btn btn-sm btn-primary vk_post_btn" href="{{$post->guid}}" target="_blank">続きを読む</a>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            @endif
+{{--            @if(count($posts) != 0)--}}
+{{--                <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-2" style="padding-left: 0 !important;">--}}
+{{--                    <div class="col-6 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto" style="height: 80vh; overflow-y: auto">--}}
+{{--                        @foreach($posts as $post)--}}
+{{--                            <div class="vk_post_body media-body">--}}
+{{--                                <h5 class="vk_post_title media-title">--}}
+{{--                                    <a href="{{$post->guid}}" target="_blank">{{$post->post_title}}</a></h5>--}}
+{{--                                <div class="vk_post_date media-date published">{{date('Y年m月d日', strtotime($post->post_date))}}</div>--}}
+{{--                                <input type="hidden" value="{{$post->post_content}}" class="text-content">--}}
+{{--                                <p class="vk_post_excerpt media-text"></p>--}}
+{{--                                <div class="vk_post_btnOuter text-right">--}}
+{{--                                    <a class="btn btn-sm btn-primary vk_post_btn" href="{{$post->guid}}" target="_blank">続きを読む</a>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        @endforeach--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            @endif--}}
             <!-- /Login-->
         </div>
     </div>
